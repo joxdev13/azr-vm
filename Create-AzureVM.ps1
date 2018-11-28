@@ -3,8 +3,9 @@ $env:dp0 = [System.IO.Path]::GetDirectoryName($0)
 
 . "$env:dp0\Functions.ps1"
 
+Connect-AzureRmAccount
 
-Create-VM -vmSuffix "DC1" -vmSize "Standard_D1_v2" -stName "cabimedstandard"
+Create-VM -vmSuffix "DCO01" -vmSize "Standard_D1_v2" -stName "cabimedstandard"
 
 
 ############################ OLD ##########################################
