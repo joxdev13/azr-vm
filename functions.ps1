@@ -63,6 +63,7 @@ function Create-VM(
         [string]$vmPrefix = "AZR", 
 		[string]$nicPrefix = "NET",
 		[string]$ipPrefix = "IP",
+        #[string]$diskSizeInGB, #disk size resize does not supported (at least for os)
 		[string]$stName,  		   
 		[string]$locName = "westeurope", 
 		[string]$rgName = "CABIMED", 		   
@@ -127,7 +128,7 @@ function Create-VM(
 	$osDiskName = $vmname+'_osDisk'
 	$osDiskCaching = 'ReadWrite'
 	$osDiskVhdUri = "https://$stName.blob.core.windows.net/vhds/"+$vmname+"_os.vhd"
-	$vm = Set-AzureRmVMOSDisk -VM $vm -VhdUri $osDiskVhdUri -name $osDiskName -CreateOption fromImage -Caching $osDiskCaching 
+	$vm = Set-AzureRmVMOSDisk -VM $vm -VhdUri $osDiskVhdUri -name $osDiskName -CreateOption fromImage -Caching $osDiskCaching #-DiskSizeInGB $diskSizeInGB
 	Write-Host "Disk created."
 	
 	New-AzureRmVM -ResourceGroupName $rgName -Location $locName -VM $vm
