@@ -66,12 +66,12 @@ function Create-VM(
         #[string]$diskSizeInGB, #disk size resize does not supported (at least for os)
 		[string]$stName,  		   
 		[string]$locName = "westeurope", 
-		[string]$rgName = "CABIMED", 		   
+		[string]$rgName = "cabimed-vm", 		   
 		[string]$vmSize,
 		[string]$subnetName = "default",
 		[string]$vNETName = "Cabimed-vnet",
         [string]$ipAddress,
-        [string]$skus = "2016-Datacenter"
+        [string]$skus = "2019-Datacenter"
 )
 {
 	$cred = Get-Credential -Message "Type the name and password of the local administrator account."
@@ -186,7 +186,7 @@ function Create-Storage(
 	[string]$skuName
 ) 
 {
-    Login-AzureRmAccount
+    #Login-AzureRmAccount
 
 	$StorageAccount = @{
 		ResourceGroupName = $rgName;
@@ -205,4 +205,3 @@ function Create-Storage(
 	### Create a Blob Container in the Storage Account
 	New-AzureStorageContainer -Context $StorageContext -Name 'vhds';
 }
-
